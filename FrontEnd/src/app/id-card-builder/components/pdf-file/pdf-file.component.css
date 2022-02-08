@@ -1,0 +1,61 @@
+.body-main {
+    color: #333333;
+    display: table;
+    font-family: "Roboto";
+    text-align: center;
+  }
+  
+  .container {
+    padding-top: 20px;
+    border: 3px solid #333333;
+    border-radius: 3px;
+    width: 100%;
+    height: auto;
+    /* display: table-cell; */
+    vertical-align: middle;
+  }
+  
+  
+  .logo img {
+    width: 60px;
+    height: 60px;
+  }
+  
+  
+  .id-card img {
+    width: 100px;
+    height: 100px;
+    border-radius: 5px;
+  }
+  
+  .sub-logo {
+    margin-top: 10px;
+  }
+  .sub-logo p {
+    margin-top: -20px;
+    font-size: small;
+  }
+  
+  
+  
+  .assignment {
+    margin: 20px;
+    padding-left: 100px;
+    padding-right: 100px;
+  }
+  
+  .left-block {
+      float: right;
+      padding-right: 50px;
+      padding-top: 40px;
+    }
+  
+    .p-valid{
+        margin-top: 120px;
+        font-size: small;
+    }
+    
+  .btn-ng{
+    background-color: #128c7e;
+    color: white;
+  }

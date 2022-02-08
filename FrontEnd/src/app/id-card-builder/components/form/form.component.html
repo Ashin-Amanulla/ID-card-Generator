@@ -1,0 +1,66 @@
+
+    
+    <br>
+    <br>
+    <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+
+        <!-- First row -->
+        <div class="row">
+            <!-- Name  -->
+            <div class="twelve columns">
+                <label>
+                    Name
+                </label>
+                <input class="u-full-width" type="text" formControlName="name" />
+            </div>
+            <!-- Email  -->
+            <div class="twelve columns">
+                <label>
+                    Email
+                </label>
+                <input class="u-full-width " type="email" formControlName="email" />
+            </div>
+        </div>
+
+        <!-- Second row -->
+        <br>
+        <div class="row">
+            <!-- Phone Number  -->
+            <div class="twelve columns">
+                <label>
+                    Phone Number
+                </label>
+                <input class="u-full-width" type="text" formControlName="number" />
+            </div>
+            <!-- course enrolled  -->
+            <div class="twelve columns">
+                <label for="exampleRecipientInput">Course Enrolled</label>
+                <select class="u-full-width" id="exampleRecipientInput" formControlName="course_enrolled">
+                    <option value="FullStack">FullStack</option>
+                    <option value="Cyber">Cyber</option>
+                    <option value="Software Testing">Software Testing</option>
+                </select>
+            </div>
+
+
+        </div>
+
+        <!-- Third row -->
+        <br>
+        <div class="row">
+            <!-- Photo Upload  -->
+            <div class="eight columns">
+                <label>
+                    Passport-size Photo
+                </label>
+                <input class="u-full-width " type="file"  (change)="passportPhoto($event)" />
+            </div>
+
+        </div>
+
+        <!-- submit -->
+        <br>
+        <input class="button-primary" type="submit" [disabled]="profileForm.pristine || profileForm.invalid"
+            value="Submit">
+
+    </form>

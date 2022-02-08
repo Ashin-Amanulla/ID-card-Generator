@@ -1,0 +1,44 @@
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+ 
+
+  <!-- Position Column -->
+  <ng-container matColumnDef="position">
+    <th class='w-100 th-center' mat-header-cell *matHeaderCellDef> No. </th>
+    <td mat-cell *matCellDef="let element; let i = index;"> {{i+1}} </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <th  class='w-100 th-center' mat-header-cell *matHeaderCellDef> Name </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+
+  <!-- Email Column -->
+  <ng-container matColumnDef="email">
+    <th  class='w-100 th-center' mat-header-cell *matHeaderCellDef> Email </th>
+    <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+  </ng-container>
+
+  <!-- Image Column -->
+  <ng-container matColumnDef="photo">
+    <th  class='w-100 th-center' mat-header-cell *matHeaderCellDef> Image </th>
+    <td mat-cell *matCellDef="let element"> <img class="table_img" src="{{idService.server_address}}/{{element.photo}}">
+    </td>
+  </ng-container>
+
+    <!-- Status Column -->
+    <ng-container matColumnDef="status">
+      <th  class='w-100 th-center' mat-header-cell *matHeaderCellDef> Status </th>
+      <td mat-cell *matCellDef="let element">
+        <button id="btnPending" *ngIf= '!element.admin_approve && !element.admin_reject' mat-flat-button disabled >Pending</button>
+        <a *ngIf= 'element.admin_approve'  mat-raised-button color="success" target = '_blank' href = '{{idService.server_address}}/uploads/pdfs/{{element._id}}.pdf'>Approved</a>
+        <button id="btnReject" *ngIf= 'element.admin_reject' mat-flat-button color="success" disabled  >Denied</button>
+
+      </td>
+    </ng-container>
+
+  <tr  class='w-100 th-center' mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr  class='w-100 th-center' mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)">
+  </tr>
+</table>

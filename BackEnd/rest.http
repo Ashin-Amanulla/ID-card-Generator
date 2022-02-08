@@ -1,0 +1,68 @@
+
+GET http://localhost:5000
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2NDQyNDE4MjgsImV4cCI6MTY0NDI0MTg0OCwiYXVkIjoiNjFlZDYyNTFjNzY5ZmI4MmUxNjc1ZjYwIiwiaXNzIjoiaWN0LWFjYWRlbXkuY29tIn0.y7Rq01zVLSgD-su2envQpfbBSbWi8hC3Hvh7Y2Jegv8
+
+
+###Login
+
+POST http://localhost:5000/auth/login
+Content-Type: application/json
+
+{
+    "email": "admin@gmail.com",
+    "password":"asfasfsfm"
+}
+
+### Register
+
+POST http://localhost:5000/auth/register
+Content-Type: application/json
+
+# {
+#     "email": "admin@gmail.com",
+#     "password":"asfasfsfm",
+#     "username" : "AShere",
+#     "role":"ADMIN"
+# }
+
+# {
+#     "email": "superadmin@gmail.com",
+#     "password":"asfasfsfm",
+#     "username" : "AShere",
+#     "role":"SUPER"
+# }
+
+{
+    "email": "student@gmail.com",
+    "password":"asfasfsfm",
+    "username" : "AShere",
+    "role":"STUDENT"
+}
+### Refresh Token
+
+POST http://localhost:5000/auth/refresh-token
+Content-Type: application/json
+
+{
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NDI5NTM3MTUsImV4cCI6MTY3NDUxMTMxNSwiYXVkIjoiNjFlZDYyNTFjNzY5ZmI4MmUxNjc1ZjYwIiwiaXNzIjoiaWN0LWFjYWRlbXkuY29tIn0.uzh3mB7woU79SxobM8YGqEr5o8Yz5czcM9o1rCeK34U"
+}
+
+### Logout
+
+POST http://localhost:5000/auth/logout
+
+
+
+### Id Details Input
+
+POST http://localhost:5000/id/id_insert
+Content-Type: application/json
+
+{
+    "Name": "kjkjv",
+    "Email":"assfg.knm@gmail.com",
+    "Number": "12345678",
+    "Photo":"C:\\fakepath\\DSCF31322.jpg",
+    "Course_Enrolled":"FullStack"
+}
+

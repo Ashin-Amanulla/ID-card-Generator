@@ -1,0 +1,27 @@
+input.ng-pristine {
+  border-color:yellow;
+}
+
+input.ng-touched.ng-invalid {
+  border-color:red;
+}
+
+input.ng-touched.ng-valid {
+  border-color:green;
+}
+
+.header-centre{
+  text-align: center;
+}
+
+.button-primary{
+  background-color: #075E54 !important;
+  transition: all 500ms ease;
+  outline: none !important;
+
+}
+
+.button-primary:hover{
+  background-color: #128c7e !important;
+}
+

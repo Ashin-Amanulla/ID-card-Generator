@@ -1,0 +1,42 @@
+/* Structure */
+table {
+    width: 100% ;
+  }
+  .body-main {
+    color: #333333;
+    display: table;
+    font-family: "Roboto";
+    text-align: center;
+  }
+  
+  .container {
+    padding-top: 20px;
+    border: 3px solid #333333;
+    border-radius: 3px;
+    width: 100%;
+    height: auto;
+    /* display: table-cell; */
+    vertical-align: middle;
+  }
+
+  .mat-table {
+    overflow-x: scroll;
+    max-width: 99%;
+  }
+  
+  .mat-cell,
+  .mat-header-cell {
+    word-wrap: initial;
+    display: table-cell;
+    padding: 0px 10px;
+    line-break: unset;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    vertical-align: middle;
+  }
+  
+  .mat-row,
+  .mat-header-row {
+    display: table-row;
+  }
