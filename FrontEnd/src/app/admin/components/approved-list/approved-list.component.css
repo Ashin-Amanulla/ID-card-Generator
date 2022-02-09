@@ -1,42 +1,104 @@
-/* Structure */
 table {
-    width: 100% ;
+  width: 1000px;
+}
+
+
+/* For Desktop View */
+@media screen and (min-width: 1024px) {
+    table {
+        width: 1000px;
+    }
   }
-  .body-main {
-    color: #333333;
-    display: table;
-    font-family: "Roboto";
-    text-align: center;
+   
+  /* For Tablet View */
+  @media screen and (min-device-width: 768px)
+  and (max-device-width: 1024px) {
+    table {
+      width: 400px;
+    }
   }
-  
-  .container {
-    padding-top: 20px;
-    border: 3px solid #333333;
-    border-radius: 3px;
-    width: 100%;
-    height: auto;
-    /* display: table-cell; */
-    vertical-align: middle;
+   
+  /* For Mobile Portrait View */
+  @media screen and (max-device-width: 480px)
+  and (orientation: portrait) {
+    table {
+      width: 200px;
+    }
+  }
+   
+  /* For Mobile Landscape View */
+  @media screen and (max-device-width: 640px)
+  and (orientation: landscape) {
+    table {
+      width: 200px;
+    }
+  }
+   
+  /* For Mobile Phones Portrait or Landscape View */
+  @media screen and (max-device-width: 640px) {
+    table {
+      width: 200px;
+    }
+  }
+   
+  /* For iPhone 4 Portrait or Landscape View */
+  @media screen and (min-device-width: 320px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+    table {
+      width: 200px;
+    }
+  }
+   
+  /* For iPhone 5 Portrait or Landscape View */
+  @media (device-height: 568px) and (device-width: 320px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+    table {
+      width: 200px;
+    }
+  }
+   
+  /* For iPhone 6 and 6 plus Portrait or Landscape View */
+  @media (min-device-height: 667px) and (min-device-width: 375px)
+  and (-webkit-min-device-pixel-ratio: 3) {
+    table {
+      width: 200px;
+    }
   }
 
-  .mat-table {
-    overflow-x: scroll;
-    max-width: 99%;
-  }
+
+
+
+
+
   
-  .mat-cell,
-  .mat-header-cell {
-    word-wrap: initial;
-    display: table-cell;
-    padding: 0px 10px;
-    line-break: unset;
-    width: 100%;
-    white-space: nowrap;
-    overflow: hidden;
-    vertical-align: middle;
-  }
-  
-  .mat-row,
-  .mat-header-row {
-    display: table-row;
-  }
+.table_img {
+  width: 50px;
+  height: 50px;
+  border-radius: 5px;
+  margin: 5px 5px 5px 5px;
+}
+
+/* .w-75 {
+  width: 75px;
+} */
+
+/* .w-100 {
+  width: 100px;
+} */
+
+/* .th-center {
+  text-align: center;
+} */
+
+.mat-success {
+    background-color: green;
+    color: #fff;
+}
+
+.buttonsMat>button {
+  margin-right: 10px;
+}
+
+.buttonsMat :last-child {
+  margin-right: 0px;
+}

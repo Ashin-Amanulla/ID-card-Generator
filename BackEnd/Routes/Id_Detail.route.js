@@ -4,6 +4,7 @@ const createError = require('http-errors')
 const idDetails = require('../Models/Id_Details.model')
 const { idDetailJoi } = require('../helpers/validation_schema')
 const { format } = require('date-fns');
+const PdfGEN = require('./pdf_gen')
 
 
 const PDFDocument = require('pdfkit');
@@ -104,6 +105,19 @@ router.get('/id_access_admin', async (req, res, next) => {
     }
 })
 
+//--------------------Approved List-------------------//
+router.get('/approved_list', async (req, res, next) => {
+    try {
+        const approvedList = await idDetails.find({
+            "admin_approve": true,
+        })
+        res.send(approvedList)
+
+    } catch (error) {
+        next(error)
+    }
+})
+
 router.post('/id_admin_approve', async (req, res, next) => {
     try {
         const id = req.body.item
@@ -112,7 +126,9 @@ router.post('/id_admin_approve', async (req, res, next) => {
             { "admin_approve": true }
         )
         if (approveId) {
-            createPDF(approveId, id);
+            // createPDF(approveId, id);
+            PdfGEN(approveId);
+
             console.log("success")
         } else {
             console.log("error")
@@ -155,71 +171,125 @@ function createPDF(approveID, path) {
             margin: 50
         });
 
-    // const monthNames = ["January", "February", "March", "April", "May", "June",
-    //     "July", "August", "September", "October", "November", "December"];
-    // const dateObj = new Date();
-    // const month = monthNames[dateObj.getMonth()];
-    // const day = String(dateObj.getDate()).padStart(2, '0');
-    // const year = dateObj.getFullYear();
-    // const output =  day + month  + year;
+    const monthNames = ["January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"];
+    const dateObj = new Date();
+    const month = monthNames[dateObj.getMonth()];
+    const day = String(dateObj.getDate()).padStart(2, '0');
+    const year = dateObj.getFullYear();
+    const output = day + month + year;
 
-    const date = new Date();
-    const output = format(date, 'DD.MM.YYYY')
-    console.log(output, typeof (output))
-
-
+    // const date = new Date();
+    // const output = format(date, 'DD.MM.YYYY')
+    // console.log(output, typeof (output))
 
 
-    generateHeader(doc, approveID);
-    // generateCustomerInformation(doc, invoice);
-    // generateInvoiceTable(doc, invoice);
-    generateFooter(doc);
 
+
+    generateHeader(doc);
+    generateBody(doc, approveID);
+    generateText(doc, approveID);
+    generateFooter(doc, output);
 
 
     doc.end();
     doc.pipe(fs.createWriteStream('uploads/pdfs/' + path + '.pdf'));
 
-
 }
 
-function generateHeader(doc, approveID) {
-    doc.image('uploads/images/cropped-ict-ico.png', 270, 40, {
-        width: 60,
+function generateHeader(doc) {
+    doc.image('uploads/images/cropped-ict-ico.png', 250, 50, {  //ict logo
+        width: 80,
         align: 'center',
+        valign: 'center'
+
     })
+
+        .moveDown()
+
         .fillColor('#444444')
         .fontSize(20)
-        .text('ICT Academy of Kerala', 190, 110, { align: 'centre' })
+        .text('ICT Academy of Kerala', 50, 145, {               //ICT header
+            width: 500,
+            align: 'center',
+        })
+
+
         .fontSize(10)
-        .text('A Govt. of india Supported & Govt. of Kerala Partnered Social Enterprise', 140, 130, { align: 'centre' })
+        .text('A Govt. of india Supported & Govt. of Kerala Partnered Social Enterprise', 50, 175, {
+            width: 500,
+            align: 'center',
+
+        })
+
+        .moveDown()
+        .moveDown()
+
+
         .fontSize(20)
-        .text('Student ID Card', 220, 180, { align: 'centre' })
+        .text('Student ID Card', 50, 200, {
+            width: 500,                 //Student Id card
+            align: 'center',
+            underline: true
+        })
         .moveDown();
 }
 
-function generateFooter(doc) {
 
+function generateBody(doc, approveId) {
 
-
-
-
-
-
-
-    doc.image('uploads/images/cropped-ict-ico.png', 270, 580, {
-        width: 60,
+    doc.image(approveId.photo, 250, 250, {
+        width: 100,
         align: 'center',
+        valign: 'center'
+    })
+        .moveDown()
+
+        .fillColor('#444444')
+        .fontSize(20)
+        .text(approveId.name, 50, 400, {               //User Name
+            width: 500,
+            align: 'center',
+
+        })
+        .moveDown();
+
+}
+
+function generateText(doc, approveId) {
+
+    doc.fillColor('#444444')
+        .fontSize(10)
+        .text('is undergoing Microskills Training in Buisness Intelligence with Excel & Tablue with ICT Academy of Kerala from  27 Decemebr 2021', 50, 450, {               //User Name
+            width: 500,
+            align: 'center',
+
+        })
+        .moveDown();
+
+}
+
+function generateFooter(doc, output) {
+
+    doc.image('uploads/images/sign.png', 200, 630, {        //CEO Sign
+        fit: [250, 75],
+        align: 'center',
+        valign: 'center'
     })
         .fontSize(15)
-        .text('CEO, ICT Academy of Kerala', 190, 650, { align: 'centre' })
-        .image('uploads/images/cropped-ict-ico.png', 40, 680, {
-            width: 20,
+        .text('CEO, ICT Academy of Kerala', 190, 700, {     //CEO Name
+            align: 'center'
+        })
+        .image('uploads/images/stamp.png', 40, 680, {       //Office Stamp
+            width: 75,
             align: 'left',
         })
+
+        .moveDown()
+
         .fontSize(10)
-        .text(
-            'Valid Till:',
+        .text(                                              //Valid date
+            'Valid Till:' + output,
             50,
             780,
             { align: 'center', width: 500 },

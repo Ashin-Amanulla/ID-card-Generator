@@ -9,12 +9,12 @@ const routes: Routes = [
   {
     path: 'user',
     loadChildren: () => import('./id-card-builder/id-card-builder.module').then(m => m.IdCardBuilderModule),
-    canActivate: [AuthGuard ]
+    // canActivate: [AuthGuard ]
   },
   {
     path: 'admin',
     loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),
-    canActivate: [AuthGuard, RoleGuard]
+    // canActivate: [AuthGuard, RoleGuard]
   },
   {
     path: '',
